@@ -50,6 +50,7 @@ class Board:
         # if valid_move(x,y)
         #    # update board
         #    move(x,y)
+        self.move(x,y,self.player)
 
         # advance state
         self.turn += 1
@@ -60,8 +61,16 @@ class Board:
         else:
             assert False, "self.player must be self.P1 or self.P2"
 
+    def move(self, x:int, y:int, player=X):
+        assert x in [1, 2, 3]
+        assert y in [1, 2, 3]
+        assert player in [Board.X, Board.E, Board.O]
+        self.rows[y-1][x-1] = player
+        return str(self)
+
     def display(self):
         print(self.__str__())
+        print()
 
     def __str__(self):
         rows = ', '.join(self.rows[0]) + '\n'
@@ -86,6 +95,18 @@ def test_prompt_turn():
     assert x, y == (1, 1)
 
 
+def test_move():
+    b = Board()
+    b.move(1, 1, Board.X)
+    assert str(b) == '''x, _, _
+_, _, _
+_, _, _'''
+    b.move(2, 2, Board.O)
+    assert str(b) == '''x, _, _
+_, o, _
+_, _, _'''
+
+
 def test_uppercase():
     assert "test".upper() == 'TEST'
 
@@ -96,5 +117,10 @@ if __name__ == '__main__':
     b.greet()
     b.display()
 
-    b.next()
-    b.next()
+    #b.next()
+    b.move(1,1,Board.X)
+    b.display()
+
+    #b.next()
+    b.move(2, 2, Board.O)
+    b.display()
