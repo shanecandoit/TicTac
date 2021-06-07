@@ -28,6 +28,21 @@ _, _, _'''
 _, o, _
 _, _, _'''
 
+def test_not_won():
+    b = Board()
+    won, who = b.is_won()
+    print(b,won,who)
+    assert not won
+    assert who == None
+
+def test_is_won():
+    b = Board()
+    b.move(1,1,Board.X)
+    b.move(2, 2, Board.X)
+    b.move(3, 3, Board.X)
+    won, who = b.is_won()
+    assert won
+    assert who == Board.X
 
 def test_uppercase():
     assert "test".upper() == 'TEST'

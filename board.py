@@ -78,7 +78,35 @@ class Board:
         rows += ', '.join(self.rows[2])
         return rows
 
+    def is_won(self) -> (bool,str):
+        """ is a board won? if so who won? """
+        r0 = self.rows[0]
+        r1 = self.rows[1]
+        r2 = self.rows[2]
 
+        # horizontal
+        if r0[0] != Board.E and r0[0] == r0[1] == r0[2]:
+            return True, r0[0]
+        elif r1[0] != Board.E and r1[0] == r1[1] == r1[2]:
+            return True, r1[0]
+        elif r2[0] != Board.E and r2[0] == r2[1] == r2[2]:
+            return True, r2[0]
+
+        # vertical
+        elif r0[0] != Board.E and r0[0] == r1[0] == r2[0]:
+            return True, r0[0]
+        elif r0[1] != Board.E and r0[1] == r1[1] == r2[1]:
+            return True, r0[1]
+        elif r0[2] != Board.E and r0[2] == r1[2] == r2[2]:
+            return True, r0[2]
+
+        # diagonal
+        elif r0[0] != Board.E and r0[0] == r1[1] == r2[2]:  # \
+            return True, r0[0]
+        elif r0[2] != Board.E and r0[2] == r1[1] == r2[0]:  # /
+            return True, r0[2]
+
+        return False, None
 
 
 if __name__ == '__main__':
