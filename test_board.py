@@ -1,6 +1,7 @@
 
 from board import Board
 
+
 def test_new_board():
     b = Board()
     assert b.__str__() == '''_, _, _
@@ -28,12 +29,14 @@ _, _, _'''
 _, o, _
 _, _, _'''
 
+
 def test_not_won():
     b = Board()
     won, who = b.is_won()
-    print(b,won,who)
+    # print(b,won,who)
     assert not won
     assert who == None
+
 
 def test_is_won():
     b = Board()
@@ -43,6 +46,7 @@ def test_is_won():
     won, who = b.is_won()
     assert won
     assert who == Board.X
+
 
 def test_uppercase():
     assert "test".upper() == 'TEST'
